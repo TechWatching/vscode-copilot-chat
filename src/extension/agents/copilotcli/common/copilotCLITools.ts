@@ -383,10 +383,7 @@ export function buildChatHistoryFromEvents(sessionId: string, events: readonly S
 				break;
 			}
 			case 'assistant.message': {
-				if (typeof event.data.chunkContent === 'string') {
-					processedMessages.add(event.data.messageId);
-					currentAssistantMessage.chunks.push(event.data.chunkContent);
-				} else if (event.data.content && !processedMessages.has(event.data.messageId)) {
+				if (event.data.content && !processedMessages.has(event.data.messageId)) {
 					processAssistantMessage(event.data.content);
 				}
 				break;

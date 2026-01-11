@@ -177,10 +177,6 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 			})));
 			disposables.add(toDisposable(this._sdkSession.on('assistant.message', (event) => {
 				// Support for streaming chunked messages.
-				if (typeof event.data.chunkContent === 'string' && event.data.chunkContent.length) {
-					chunkMessageIds.add(event.data.messageId);
-					this._stream?.markdown(event.data.chunkContent);
-				}
 				if (typeof event.data.content === 'string' && event.data.content.length && !chunkMessageIds.has(event.data.messageId)) {
 					this._stream?.markdown(event.data.content);
 				}
